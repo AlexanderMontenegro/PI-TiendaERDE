@@ -1,0 +1,39 @@
+/* buttons.css */
+
+.btn {
+    display: inline-block;
+    background-color: #1DB954;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #1ED760;
+  }
+  
+  .btn-primary {
+    background-color: #1DB954;
+  }
+  
+  .btn-primary:hover {
+    background-color: #1ED760;
+  }
+  
+  .btn-secondary {
+    background-color: #FFFFFF;
+    color: #1DB954;
+    border: 1px solid #1DB954;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #1DB954;
+    color: #FFFFFF;
+  }
+  
