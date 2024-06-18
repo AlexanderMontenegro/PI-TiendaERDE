@@ -1,25 +1,15 @@
+const { Sequelize } = require('sequelize');
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-
-const User = sequelize.define('User', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  database: 'erdedc_db',
+  username: 'tu_usuario',
+  password: 'tu_contraseña',
+  host: 'localhost',
+  port: 5432,
+  define: {
+    timestamps: false, // Opcional: desactiva los campos createdAt y updatedAt automáticamente generados
   },
 });
 
-module.exports = User;
+module.exports = sequelize;

@@ -1,34 +1,26 @@
-require('dotenv').config();
+require('dotenv').config(); // Carga las variables de entorno desde .env
 const express = require('express');
-const passport = require('passport');
-const sequelize = require('./config/database');
-const User = require('./models/User');
-const Product = require('./models/Product');
+const cors = require('cors');
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
+const sequelize = require('./config/db'); // Asegúrate de importar db.js correctamente
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-// Middlewares
+// Middleware
 app.use(express.json());
-app.use(passport.initialize());
+app.use(cors());
 
-// Configurar Passport
-require('./config/passport')(passport);
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
-// Rutas
-app.use('/api/users', require('./routes/users'));
-app.use('/api/products', require('./routes/products'));
-app.use('/api/cart', require('./routes/cart'));
-
-// Sincronizar modelos con la base de datos
+// Start server
 sequelize.sync()
   .then(() => {
-    console.log('Base de datos sincronizada');
-    // Iniciar el servidor
-    app.listen(port, () => {
-      console.log(`Servidor corriendo en http://localhost:${port}`);
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
     });
   })
-  .catch(err => {
-    console.error('Error al sincronizar la base de datos:', err);
-  });
+  .catch(err => console.error('Error al iniciar el servidor:', err));
